@@ -28,9 +28,6 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-    // const data = await process();
-    // console.log(data);
-    // await interaction.def
     if (interaction.inGuild()) {
       await interaction.reply({content: `Please perform verification commands from a direct message`, ephemeral: true});
       try {

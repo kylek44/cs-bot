@@ -93,10 +93,6 @@ exports.finishVerification = async (interaction, member, token) => {
         userId: user.id
       }
     });
-    // const roles = await user.getRoles();
-    // const roleSnowflakes = roles.map(role => role.snowflake);
-    // await member.roles.add(roleSnowflakes);
-    // await message.reply()
     logger.info(`Updated roles for ${name}`);
   } catch (error) {
     logger.error(error);

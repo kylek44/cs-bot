@@ -3,3 +3,6 @@
 /.env
 /combined.log
 /error.log
+/.idea/cs-bot.iml
+/.idea/modules.xml
+/.idea/vcs.xml

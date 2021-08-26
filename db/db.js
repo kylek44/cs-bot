@@ -163,14 +163,6 @@ const Token = sequelize.define('token', {
 }, {
   tableName: 'TOKENS',
   timestamps: false
-  // indexes: [
-  //   {
-  //     fields: ['token']
-  //   },
-  //   {
-  //     fields: ['userId']
-  //   }
-  // ]
 });
 
 const Channel = sequelize.define('channel',  {
@@ -237,16 +229,6 @@ User.hasOne(Token, {foreignKey: 'USER_ID'});
 Token.belongsTo(User, {foreignKey: 'USER_ID', targetKey: 'id'});
 Role.belongsToMany(Channel, {through: ChannelRole, foreignKey: 'roleId', otherKey: 'channelId'});
 Channel.belongsToMany(Role, {through: ChannelRole, foreignKey: 'channelId', otherKey: 'roleId'});
-// User.hasMany(UserRole, {foreignKey: 'USER_ID'});
-// UserRole.belongsTo(User, {foreignKey: 'USER_ID'});
-// Role.hasMany(UserRole, {foreignKey: 'ROLE_ID'});
-// UserRole.belongsTo(Role, {foreignKey: 'ROLE_ID'});
-// User.belongsToMany(Role, {through: UserRole});
-// Role.belongsToMany(User, {through: UserRole});
-// Channel.belongsToMany(Role, {through: ChannelRole});
-// Role.belongsToMany(Channel, {through: ChannelRole});
-// User.hasOne(Token);
-// Token.belongsTo(User);
 
 exports.sequelize = sequelize;
 exports.User = User;

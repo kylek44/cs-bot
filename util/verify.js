@@ -38,7 +38,7 @@ exports.verifyMember = async (interaction, member, email) => {
     let token;
     if (tokens.length === 0) {
       let buffer = await randomBytesAsync(16);
-      token = Token.build({token: 'UAFSTOKEN' + buffer.toString('hex'), userId: user.id, snowflake: user.snowflake});
+      token = Token.build({token: 'UAFSTOKEN' + buffer.toString('hex'), userId: user.id, snowflake: interaction.user.id});
       await token.save();
     } else {
       const output = `You have already been sent a confirmation email. Check your spam folder.\n\nSending another confirmation email to '${email}' just in case.`
@@ -83,11 +83,18 @@ exports.finishVerification = async (interaction, member, token) => {
     const roles = await user.getRoles();
     const roleSnowflakes = roles.map(role => role.snowflake).filter(s => s !== process.env.BOT_VERIFIED_ID);
     console.log(roleSnowflakes);
-    try {
-      await member.roles.add(roleSnowflakes);
-    } catch (err) {
-      logger.error(err);
+    for (const snowflake of roleSnowflakes) {
+      try {
+        await member.roles.add(snowflake);
+      } catch (err) {
+        logger.error(err);
+      }
     }
+    // try {
+    //   await member.roles.add(roleSnowflakes);
+    // } catch (err) {
+    //   logger.error(err);
+    // }
     await Token.destroy({
       where: {
         userId: user.id

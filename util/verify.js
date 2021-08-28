@@ -18,7 +18,7 @@ exports.verifyMember = async (interaction, member, email) => {
       const output = `The email '${email}' does not exist. Please check the spelling.\n\nIf the email is correct please direct message Kyle Kelly.`;
       await interaction.user.send(output);
       const name = member.nickname ? member.nickname : interaction.user.name;
-      logger.debug(`Member: ${name} attempted to verify email ${email}`);
+      logger.info(`Member: ${name} attempted to verify email ${email}`);
       return;
     }
     if (user.verified) {
@@ -34,7 +34,6 @@ exports.verifyMember = async (interaction, member, email) => {
         userId: user.id
       }
     });
-    console.log(tokens);
     let token;
     if (tokens.length === 0) {
       let buffer = await randomBytesAsync(16);

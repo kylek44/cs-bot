@@ -13,11 +13,9 @@ sequelize.sync();
 
 client.on('ready', async () => {
   const guild = await client.guilds.fetch(process.env.BOT_GUILD_ID);
-  const users = await guild.members.fetch();
+  const users = await guild.roles.fetch(process.env.BOT_VERIFIED_ID).members;
 
-  for (const user of users) {
-    console.log(user);
-    if (!user.roles.cache.has(process.env.BOT_VERIFIED_ID)) continue;
+  for (const user of await users) {
     const u = await User.findOne({
       where: {
         snowflake: user.id

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const {Client, Intents, Collection} = require('discord.js');
-const {sequelize, User, Role, UserRole, Channel, ChannelRole, Token} = require('../db/db');
+const {sequelize, User, Role, UserRole, Channel, ChannelRole, Token} = require('./db/db');
 const fs = require("fs");
 const token = process.env.BOT_TOKEN;
 
@@ -11,9 +11,7 @@ const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'
 
 sequelize.sync();
 
-client.login(token);
-
-(async () => {
+client.on('ready', async () => {
   const guild = await client.guilds.fetch(process.env.BOT_GUILD_ID);
   const users = await guild.members.fetch();
   for (const user of users) {
@@ -30,4 +28,6 @@ client.login(token);
       }
     }
   }
-})();
+})
+
+client.login(token);

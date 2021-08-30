@@ -13,7 +13,7 @@ sequelize.sync();
 
 client.on('ready', async () => {
   const guild = await client.guilds.fetch(process.env.BOT_GUILD_ID);
-  const users = await guild.roles.fetch(process.env.BOT_VERIFIED_ID).members;
+  const users = await guild.roles.cache.get(process.env.BOT_VERIFIED_ID).members;
 
   for (const user of users) {
     const u = await User.findOne({

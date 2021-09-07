@@ -23,7 +23,7 @@ module.exports = {
     if (member) {
       message.reply(`If you are trying to verify your account run the '/verify begin' or '/verify finish' command. Just type /v and the command should show up. If you have any problems please contact Kyle Kelly.`);
     } else {
-      message.reply(`You are not a member of a guild I am in.`);
+      message.reply(`You are not a member of the UAFS Computer Science Discord.`);
     }
   }
 }

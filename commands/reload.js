@@ -11,7 +11,10 @@ module.exports = {
     const guild = await interaction.client.guilds.fetch(process.env.BOT_GUILD_ID);
     const member = await guild.members.fetch(interaction.user.id);
 
-    if (!member || !member.roles.cache.has(process.env.BOT_VERIFIED_ID)) return;
+    if (!member || !member.roles.cache.has(process.env.BOT_VERIFIED_ID)) {
+      await interaction.editReply(`You are either not a member of the UAFS Computer Science discord server or you have not verified your account.`);
+      return;
+    }
 
     const user = await User.findOne({
       where: {

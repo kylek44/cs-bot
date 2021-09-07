@@ -22,7 +22,7 @@ exports.verifyMember = async (interaction, member, email) => {
       return;
     }
     if (user.verified) {
-      const output = `The email '${email}' has already been verified`;
+      const output = `The email '${email}' has already been verified. If this is your email run /reload to be added to your class channels.`;
       await interaction.user.send(output);
       const name = member.nickname ? member.nickname : interaction.user.username;
       const snowflake = member.id;
@@ -62,7 +62,7 @@ exports.finishVerification = async (interaction, member, token) => {
       return;
     }
     if (user.verified) {
-      await interaction.user.send(`Your account is already verified.`);
+      await interaction.user.send(`Your account is already verified. Run the /reload command to be added to your class channels.`);
       return;
     }
     const name = user.nickname ? user.nickname : user.firstName + " " + user.lastName;
